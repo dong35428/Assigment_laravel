@@ -5,7 +5,7 @@
 @section('content')
     <div class="m-2">
         <h1>Danh mục </h1>
-        <a class="btn btn-info" href="{{ route('admin.categories.create') }}">Thêm bài viết</a>
+        <a class="btn btn-info" href="{{ route('admin.categories.create') }}">Thêm danh mục</a>
         <table class="table table-striped p-3 mt-3">
             <thead>
                 <tr>
@@ -20,9 +20,9 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>
-                            <a class="btn btn-warning" href="{{ route('admin.categories.edit', $category->id) }}">Sửa</a>
-                            <a class="btn btn-success" href="{{ route('admin.categories.show', $category->id) }}">show</a>
-                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
+                            <a class="btn btn-warning" href="{{ route('admin.categories.edit', $category) }}">Sửa</a>
+                            <a class="btn btn-success" href="{{ route('admin.categories.show', $category) }}">show</a>
+                            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST"
                                 style="display: inline;">
                                 @csrf
                                 @method('DELETE')

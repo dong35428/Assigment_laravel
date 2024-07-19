@@ -14,7 +14,9 @@
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
-            <input type="text" class="form-select" name="keyword"  placeholder="Tìm kiếm...">
+            <input type="
+
+            " class="form-select" name="keyword"  placeholder="Tìm kiếm...">
             <button type="submit">Search</button>
         </form>
 

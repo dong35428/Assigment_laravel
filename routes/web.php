@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\ShowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,9 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('client.index');
-});
+Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/show/{post}',[ShowController::class,'show'])->name('show');
+Route::get('/danhmuc/{post}',[ShowController::class,'danhmuc'])->name('danhmuc');
 
 Route::prefix('admin')
     ->name('admin.')
@@ -29,7 +30,7 @@ Route::prefix('admin')
         })->name('index');
 
         Route::prefix('posts')
-            ->name('posts.')
+            ->as('posts.')
             ->group(function () {
                 Route::get('/', [PostController::class, 'index'])
                     ->name('index');
@@ -46,25 +47,25 @@ Route::prefix('admin')
                 Route::delete('/delete/{post}', [PostController::class, 'destroy'])
                     ->name('destroy');
                 Route::get('/seach', [PostController::class, 'seach'])
-                ->name('seach');
+                    ->name('seach');
             });
 
         Route::prefix('categories')
-        ->name('categories.')
-        ->group(function () {
-            Route::get('/', [CategoryController::class, 'index'])
-                ->name('index');
-            Route::get('/create', [CategoryController::class, 'create'])
-                ->name('create');
-            Route::post('/store', [CategoryController::class,'store'])
-                ->name('store');
-            Route::get('/show/{category}', [CategoryController::class,'show'])
-                ->name('show');
-            Route::get('/edit/{category}', [CategoryController::class, 'edit'])
-                ->name('edit');
-            Route::put('/update/{category}', [CategoryController::class, 'update'])
-                ->name('update');
-            Route::delete('/delete/{category}', [CategoryController::class, 'destroy'])
-                ->name('destroy');
-        });
+            ->as('categories.')
+            ->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])
+                    ->name('index');
+                Route::get('/create', [CategoryController::class, 'create'])
+                    ->name('create');
+                Route::post('/store', [CategoryController::class, 'store'])
+                    ->name('store');
+                Route::get('/show/{category}', [CategoryController::class, 'show'])
+                    ->name('show');
+                Route::get('/edit/{category}', [CategoryController::class, 'edit'])
+                    ->name('edit');
+                Route::put('/update/{category}', [CategoryController::class, 'update'])
+                    ->name('update');
+                Route::delete('/delete/{category}', [CategoryController::class, 'destroy'])
+                    ->name('destroy');
+            });
     });

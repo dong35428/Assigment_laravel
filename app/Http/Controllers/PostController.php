@@ -28,11 +28,11 @@ class PostController extends Controller
         if (!$keyword && $categoriesID) {
             $posts = Post::query()->where('category_id', $categoriesID)->get();
         }
-        if ($keyword && $categoriesID) {
-            $posts = Post::query()->where('title', 'LIKE', "%{$keyword}%")
-                ->where('category_id', $categoriesID)
-                ->get();
-        }
+        // if ($keyword && $categoriesID) {
+        //     $posts = Post::query()->where('title', 'LIKE', "%{$keyword}%")
+        //         ->where('category_id', $categoriesID)
+        //         ->get();
+        // }
 
 
 

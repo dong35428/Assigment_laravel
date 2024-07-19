@@ -6,95 +6,20 @@
         <div class="collapse navbar-collapse text-center order-lg-2 order-3" id="navigation">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        homepage <i class="ti-angle-down ml-1"></i>
+                    <a class="nav-link" href="{{ route('index') }}">
+                        Trang chủ
                     </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/client/index-full.html">Homepage Full Width</a>
-
-                        <a class="dropdown-item" href="/client/index-full-left.html">Homepage Full With Left Sidebar</a>
-
-                        <a class="dropdown-item" href="/client/index-full-right.html">Homepage Full With Right
-                            Sidebar</a>
-
-                        <a class="dropdown-item" href="/client/index-list.html">Homepage List Style</a>
-
-                        <a class="dropdown-item" href="/client/index-list-left.html">Homepage List With Left Sidebar</a>
-
-                        <a class="dropdown-item" href="/client/index-list-right.html">Homepage List With Right
-                            Sidebar</a>
-
-                        <a class="dropdown-item" href="/client/index-grid.html">Homepage Grid Style</a>
-
-                        <a class="dropdown-item" href="/client/index-grid-left.html">Homepage Grid With Left Sidebar</a>
-
-                        <a class="dropdown-item" href="/client/index-grid-right.html">Homepage Grid With Right
-                            Sidebar</a>
-
-                    </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        About <i class="ti-angle-down ml-1"></i>
-                    </a>
-                    <div class="dropdown-menu">
+                @foreach ($category as $item)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('danhmuc', $item->id) }}">{{ $item->name }}</a>
+                    </li>
+                @endforeach
 
-                        <a class="dropdown-item" href="/client/about-me.html">About Me</a>
-
-                        <a class="dropdown-item" href="/client/about-us.html">About Us</a>
-
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/client/contact.html">Contact</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">Pages <i class="ti-angle-down ml-1"></i>
-                    </a>
-                    <div class="dropdown-menu">
-
-                        <a class="dropdown-item" href="/client/author.html">Author</a>
-
-                        <a class="dropdown-item" href="/client/author-single.html">Author Single</a>
-
-                        <a class="dropdown-item" href="/client/advertise.html">Advertise</a>
-
-                        <a class="dropdown-item" href="/client/post-details.html">Post Details</a>
-
-                        <a class="dropdown-item" href="/client/post-elements.html">Post Elements</a>
-
-                        <a class="dropdown-item" href="/client/tags.html">Tags</a>
-
-                        <a class="dropdown-item" href="/client/search-result.html">Search Result</a>
-
-                        <a class="dropdown-item" href="/client/search-not-found.html">Search Not Found</a>
-
-                        <a class="dropdown-item" href="/client/privacy-policy.html">Privacy Policy</a>
-
-                        <a class="dropdown-item" href="/client/terms-conditions.html">Terms Conditions</a>
-
-                        <a class="dropdown-item" href="/client/404.html">404 Page</a>
-
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/client/shop.html">Shop</a>
-                </li>
             </ul>
         </div>
 
         <div class="order-2 order-lg-3 d-flex align-items-center">
-            <select class="m-2 border-0 bg-transparent" id="select-language">
-                <option id="en" value="" selected>En</option>
-                <option id="fr" value="">Fr</option>
-            </select>
-
             <!-- search -->
             <form class="search-bar">
                 <input id="search-query" name="s" type="search" placeholder="Type &amp; Hit Enter...">

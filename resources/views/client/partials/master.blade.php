@@ -25,18 +25,18 @@
 </head>
 
 <body>
-    <!-- navigation -->F
+    <!-- navigation -->
     <header class="navigation fixed-top">
         @include('client.partials.header')
 
     </header>
     <!-- /navigation -->
-    <div class="container">
+    <div class="container mt-5">
         @yield('content')
     </div>
 
 
-    <footer class="footer">
+    <footer class="footer d-flex">
         @include('client.partials.footer');
     </footer>
 

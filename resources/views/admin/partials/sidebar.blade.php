@@ -42,6 +42,16 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Post</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.tags.index')}}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tag</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.users.index')}}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>User</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

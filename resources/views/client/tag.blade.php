@@ -1,14 +1,14 @@
 @extends('client.partials.master')
 @section('title')
-    {{ $categoryID->name }}
+    {{ $tagID->name }}
 @endsection
 @section('content')
     <section class="section-sm">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8  mb-5 mb-lg-0">
-                    <h2 class="h5 section-title">{{ $categoryID->name }}</h2>
-                    @foreach ($posts as $post)
+                    <h2 class="h5 section-title">{{ $tagID->name }}</h2>
+                    @foreach ($tags->posts as $post)
                         <article class="card mb-4">
                             <div class="post-slider">
                                 <img src="{{ asset($post->image) }}" class="card-img-top" alt="post-thumb">

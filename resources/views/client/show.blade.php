@@ -12,7 +12,7 @@
                             <img src="{{ asset($post->image) }}" class="card-img" alt="post-thumb">
                         </div>
 
-                        <h1 class="h2">{{$post->title}}</h1>
+                        <h1 class="h2">{{ $post->title }}</h1>
                         <ul class="card-meta my-3 list-inline">
                             <li class="list-inline-item">
                                 <a href="author-single.html" class="card-meta-author">
@@ -21,26 +21,27 @@
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <i class="ti-timer"></i>{{$post->created_at}}
+                                <i class="ti-timer"></i>{{ $post->created_at }}
                             </li>
 
 
                         </ul>
                         <div class="content">
-                            {{$post->content}}
-                                companies
-                                are reaching out to digital agencies, responding to the new possibilities available.
-                                However, the industryis fast becoming overcrowded, heaving with agencies offering similar
-                                services — on the surface, at least.
-                                Producing creative, fresh projects is the key to standing out. Unique side projects are the
-                                best place toinnovate, but balancing commercially and creatively lucrative work is tricky.
-                                So, this article looks at</p>
+                            {{ $post->content }}
+                            companies
+                            are reaching out to digital agencies, responding to the new possibilities available.
+                            However, the industryis fast becoming overcrowded, heaving with agencies offering similar
+                            services — on the surface, at least.
+                            Producing creative, fresh projects is the key to standing out. Unique side projects are the
+                            best place toinnovate, but balancing commercially and creatively lucrative work is tricky.
+                            So, this article looks at</p>
                         </div>
                     </article>
+                    <a class="btn btn-warning" href="{{ route('index') }}">Quay lại >></a>
 
                 </div>
 
-                <div class="col-lg-9 col-md-12">
+                {{-- <div class="col-lg-9 col-md-12">
                     <div class="mb-5 border-top mt-4 pt-5">
                         <h3 class="mb-4">Bình luận</h3>
 
@@ -84,7 +85,7 @@
                             <button class="btn btn-primary" type="submit">Gửi</button>
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

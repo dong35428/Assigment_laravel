@@ -16,7 +16,7 @@
             </select>
             <input type="
 
-            " class="form-select" name="keyword"  placeholder="Tìm kiếm...">
+            " class="form-select" name="keyword" placeholder="Tìm kiếm...">
             <button type="submit">Search</button>
         </form>
 
@@ -27,7 +27,10 @@
                     <th>Tiêu đề</th>
                     <th>Ảnh đại diện</th>
                     <th>Thể loại</th>
+                    <th>Tag</th>
                     <th>Ngày đăng</th>
+                    <th>Tác giả</th>
+                    <th>Lượt xem </th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -38,8 +41,14 @@
                         <td>{{ $post->title }}</td>
                         <td><img src="{{ asset($post->image) }}" alt="" width="200px"></td>
                         <td>{{ $post->category->name }}</td>
-
+                        <td>
+                            @foreach ($post->tags as $item)
+                                <p>{{ $item->name }}</p>
+                            @endforeach
+                        </td>
                         <td>{{ $post->created_at }}</td>
+                        <td>{{ $post->user->name }}</td>
+                        <td>{{ $post->view }}</td>
                         <td>
                             <a class="btn btn-warning" href="{{ route('admin.posts.edit', $post->id) }}">Sửa</a>
                             <a class="btn btn-success" href="{{ route('admin.posts.show', $post->id) }}">show</a>
@@ -54,6 +63,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- {{ $posts->link()}} --}}
+        {{ $posts->links() }}
+
     </div>
 @endsection

@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Post_tag;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -16,10 +20,7 @@ class PostController extends Controller
     {
 
         $category = Category::query()->select('id', 'name')->get();
-
         $categoriesID = $request->input('category_id');
-
-
         $keyword = $request->input('keyword');
 
         if ($keyword && !$categoriesID) {
@@ -42,12 +43,13 @@ class PostController extends Controller
     public function index()
     {
         $category = Category::query()->select('id', 'name')->get();
-        $posts = Post::query()->with('category', 'user')->latest()->paginate();
+        $posts = Post::query()->with('category', 'user')->latest('id')->paginate(5);
         return view('admin.posts.index', compact('posts', 'category'));
     }
     public function show(string $id)
     {
         $post = Post::query()->find($id);
+        $post->increment('view');
         return view('admin.posts.show', compact('post'));
     }
 
@@ -56,12 +58,17 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::query()->select('id', 'name')->get();
         $category = Category::query()->select('id', 'name')->get();
 
-        return view('admin.posts.create', compact('category')); // chuyển đến trang thêm
+        return view('admin.posts.create', compact('category', 'tags')); // chuyển đến trang thêm
     }
     public function store(Request $request)
     {
+        // $data['author_id'] = Auth::user()->name;
+        // dd($data['author_id']);
+
+        // dd($request);
 
         $data = $request->except('image');
 
@@ -70,7 +77,21 @@ class PostController extends Controller
             $data['image'] = 'storage/' . $path; // lưu ảnh vào thư mục posts của storage
 
         }
-        Post::create($data);
+        // dd($data);
+
+        $post = Post::create($data);
+
+        //xử lí biến thể
+        if ($request->post_tags) {
+            for ($i = 0; $i < count($request->post_tags['tag_id']); $i++) {
+                $post_tags = [
+                    'post_id' => $post->id,
+                    'tag_id' => $request->post_tags['tag_id'][$i]
+                ];
+                Post_tag::create($post_tags);
+            }
+        }
+
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'Thêm bài viết thành công');
@@ -79,8 +100,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        $category = Category::query()->pluck('name', 'id')->all();
-        return view('admin.posts.edit', compact('post', 'category'));
+        $category = Category::query()->get();
+        $tag = Tag::all();
+        return view('admin.posts.edit', compact('post', 'category', 'tag'));
     }
 
     public function update(Request $request, string $id)
@@ -111,6 +133,7 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         $data = Post::find($id);
+        $data->tags()->sync([]);
         $data->delete();
         if ($data->image && file_exists(public_path($data->image))) {
             unlink(public_path($data->image));

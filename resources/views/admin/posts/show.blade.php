@@ -25,10 +25,18 @@
                                 {{ $value }}
                             @endif
                         </td>
+
+
                     </tr>
                 @endforeach
+                <h4>Tag:
+                    @foreach ($post->tags as $item)
+                        - {{ $item->name }}
+                    @endforeach
+                </h4>
+
             </tbody>
         </table>
-    <a class="btn btn-primary" href="{{ route('admin.posts.index')}}">Quay lại</a>
+        <a class="btn btn-primary" href="{{ route('admin.posts.index') }}">Quay lại</a>
     </div>
 @endsection

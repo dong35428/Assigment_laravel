@@ -1,5 +1,10 @@
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-white">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    <nav class="navbar navbar-expand-lg navbar-white p-3">
         <a class="navbar-brand order-1" href="/client/index.html">
             <img class="img-fluid" width="100px" src="/client/images/logo.png" alt="Reader | Hugo Personal Blog Template">
         </a>
@@ -20,16 +25,21 @@
         </div>
 
         <div class="order-2 order-lg-3 d-flex align-items-center">
-            <!-- search -->
-            <form class="search-bar">
-                <input id="search-query" name="s" type="search" placeholder="Type &amp; Hit Enter...">
-            </form>
+            @if (Auth::user())
+                <div class=" btn btn-outline-success dropdown nav-item">
+                    <a class="" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            @else
+                <a href="{{ route('login') }}" class="btn btn-outline-secondary"> Đăng nhập / Đăng kí</a>
+            @endif
 
-            <button class="navbar-toggler border-0 order-1" type="button" data-toggle="collapse"
-                data-target="#navigation">
-                <i class="ti-menu"></i>
-            </button>
         </div>
+
 
     </nav>
 </div>

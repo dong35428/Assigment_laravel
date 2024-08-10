@@ -26,9 +26,9 @@
             <div class="form-group">
                 <label for="category_id">Thể loại</label>
                 <select class="form-control" id="category_id" name="category_id">
-                    @foreach ($category as $id => $name)
-                        <option @if ($post->category_id == $id) selected @endif value="{{ $id }}">
-                            {{ $name }}</option>
+                    @foreach ($category as $item)
+                        <option @if ($post->category_id == $item->id) selected @endif value="{{ $item->id }}">
+                            {{ $item->name }}</option>
                     @endforeach
                 </select>
             </div>

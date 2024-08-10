@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Cập nhật thành công');
     }
     public function destroy(string $id){
-        Category::find($id)->delete();
+        Category::findOrFail($id)->delete();
         return redirect()->route('admin.categories.index')->with('success', 'Xóa thành công');
     }
 
